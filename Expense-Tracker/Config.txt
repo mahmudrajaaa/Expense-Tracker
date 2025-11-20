@@ -1,0 +1,10 @@
+yes change the remote to https://github.com/mahmudrajaaa/Expense-Tracker.git
+Publishable Key  : sb_publishable_eIUGI-KWWrZMHNhQOHFqeQ_bixJjr3R
+SUPABASE_SERVICE_ROLE_KEY : sb_secret_QOv1jt7jQhJ9O0nkhOhGsw_Hz7pFt1A
+
+yes take care all Database setup
+yes start completely fresh
+best recommended theme 
+Light mode prefered
+
+No Node.js install recommend me what to do in local
