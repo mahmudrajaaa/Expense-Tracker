@@ -128,13 +128,13 @@ export function BillForm({
       <div className="space-y-2">
         <Label htmlFor="category">Category (Optional)</Label>
         <Select
-          value={selectedCategory}
-          onValueChange={(value) => setValue("category", value)}
+          value={selectedCategory || "none"}
+          onValueChange={(value) => setValue("category", value === "none" ? "" : value)}
           disabled={isSubmitting}
         >
           <SelectTrigger id="category">
             <SelectValue placeholder="Select category (optional)">
-              {selectedCategory && (
+              {selectedCategory ? (
                 <span className="flex items-center gap-2">
                   <span>
                     {CATEGORIES.find((c) => c.value === selectedCategory)?.icon}
@@ -143,11 +143,13 @@ export function BillForm({
                     {CATEGORIES.find((c) => c.value === selectedCategory)?.label}
                   </span>
                 </span>
+              ) : (
+                <span className="text-muted-foreground">None</span>
               )}
             </SelectValue>
           </SelectTrigger>
           <SelectContent>
-            <SelectItem value="">None</SelectItem>
+            <SelectItem value="none">None</SelectItem>
             {CATEGORIES.map((category) => (
               <SelectItem key={category.value} value={category.value}>
                 <span className="flex items-center gap-2">
