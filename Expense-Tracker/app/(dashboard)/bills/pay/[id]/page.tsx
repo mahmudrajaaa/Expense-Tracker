@@ -13,12 +13,13 @@ import { PayBillForm } from "./PayBillForm";
 export const dynamic = "force-dynamic";
 
 interface PageProps {
-  params: {
+  params: Promise<{
     id: string;
-  };
+  }>;
 }
 
 export default async function PayBillPage({ params }: PageProps) {
+  const { id } = await params;
   const supabase = await createClient();
   const {
     data: { user },
@@ -33,7 +34,7 @@ export default async function PayBillPage({ params }: PageProps) {
     getUserSettings(),
   ]);
 
-  const bill = bills.find((b) => b.id === params.id);
+  const bill = bills.find((b) => b.id === id);
 
   if (!bill) {
     notFound();

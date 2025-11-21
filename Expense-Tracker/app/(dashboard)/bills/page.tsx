@@ -1,8 +1,8 @@
-import { getBills, getBillsPaid, getBillStatus } from "@/actions/bills";
+import { getBills, getBillStatus } from "@/actions/bills";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { formatCurrency } from "@/lib/calculations";
 import { getUserSettings } from "@/actions/settings";
-import { BillCard } from "@/components/bills/BillCard";
+import { BillsList } from "./BillsList";
 import { BillsClient } from "./BillsClient";
 import Link from "next/link";
 import { Plus } from "lucide-react";
@@ -16,7 +16,6 @@ export default async function BillsPage() {
 
   const today = new Date();
   const currentMonth = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, "0")}`;
-  const billsPaid = await getBillsPaid(currentMonth);
 
   // Get bill statuses
   const billsWithStatus = await Promise.all(
@@ -123,17 +122,7 @@ export default async function BillsPage() {
               </Link>
             </div>
           ) : (
-            <div className="space-y-3">
-              {billsWithStatus.map((bill) => (
-                <BillCard
-                  key={bill.id}
-                  bill={bill}
-                  currency={settings.currency}
-                  status={bill.status}
-                  showActions={true}
-                />
-              ))}
-            </div>
+            <BillsList bills={billsWithStatus} currency={settings.currency} />
           )}
         </CardContent>
       </Card>

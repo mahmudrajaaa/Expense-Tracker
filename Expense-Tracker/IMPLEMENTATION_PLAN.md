@@ -469,6 +469,8 @@ expense-tracker/
 │   │   ├── bills/
 │   │   │   ├── add/
 │   │   │   ├── pay/[id]/
+│   │   │   ├── BillsList.tsx
+│   │   │   ├── BillsClient.tsx
 │   │   │   └── page.tsx
 │   │   ├── reports/
 │   │   ├── settings/
@@ -559,6 +561,8 @@ expense-tracker/
 1. **BillForm Select Component**: Fixed empty string value error by using "none" as placeholder value
 2. **Bills Master Page**: Complete rewrite to use BillCard components with inline CRUD
 3. **BillsClient Component**: Added FAB and quick add modal for mobile users
+4. **Pay Bill Page**: Fixed Next.js 16 params handling by making params async (Promise-based)
+5. **Bills List Component**: Created client-side BillsList component to handle edit/delete callbacks and page refresh
 
 ### Next Immediate Tasks
 1. Create chart components using Recharts (CategoryPieChart, SpendingTrendChart, PaymentModeChart)
