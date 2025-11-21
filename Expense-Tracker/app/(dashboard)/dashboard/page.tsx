@@ -8,11 +8,10 @@ import {
   getCategoryBreakdown,
   formatCurrency,
   getCategoryIcon,
-  getCategoryColor,
-  getPaymentModeIcon
 } from "@/lib/calculations";
-import { format, formatDistanceToNow } from "date-fns";
 import Link from "next/link";
+import { ExpenseCard } from "@/components/expenses/ExpenseCard";
+import { DashboardClient } from "./DashboardClient";
 
 export const dynamic = "force-dynamic";
 
@@ -163,7 +162,7 @@ export default async function DashboardPage() {
         <CardHeader>
           <div className="flex justify-between items-center">
             <CardTitle className="text-lg font-semibold">Recent Transactions</CardTitle>
-            <Link href="/dashboard/transactions" className="text-sm text-primary hover:text-blue-600">
+            <Link href="/transactions" className="text-sm text-primary hover:text-blue-600">
               View All
             </Link>
           </div>
@@ -176,39 +175,20 @@ export default async function DashboardPage() {
           ) : (
             <div className="space-y-3">
               {recentExpenses.map((expense) => (
-                <div
+                <ExpenseCard
                   key={expense.id}
-                  className="flex items-center justify-between p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors"
-                >
-                  <div className="flex items-center gap-4">
-                    <span className="text-2xl">{getCategoryIcon(expense.category)}</span>
-                    <div>
-                      <p className="font-medium text-gray-900">{expense.item}</p>
-                      <div className="flex items-center gap-2 mt-1">
-                        <span className={`text-xs px-2 py-1 rounded-full ${getCategoryColor(expense.category)}`}>
-                          {expense.category}
-                        </span>
-                        <span className="text-xs text-gray-500">
-                          {getPaymentModeIcon(expense.payment_mode)} {expense.payment_mode.toUpperCase()}
-                        </span>
-                        <span className="text-xs text-gray-500">
-                          {formatDistanceToNow(new Date(expense.date), { addSuffix: true })}
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="text-right">
-                    <p className="text-lg font-semibold text-gray-900">
-                      {formatCurrency(Number(expense.amount), settings.currency)}
-                    </p>
-                    <p className="text-xs text-gray-500">{format(new Date(expense.date), "MMM d, h:mm a")}</p>
-                  </div>
-                </div>
+                  expense={expense}
+                  currency={settings.currency}
+                  showActions={true}
+                />
               ))}
             </div>
           )}
         </CardContent>
       </Card>
+
+      {/* Client-side components (FAB and Modal) */}
+      <DashboardClient currency={settings.currency} />
     </div>
   );
 }
