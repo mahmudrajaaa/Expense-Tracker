@@ -563,6 +563,7 @@ expense-tracker/
 3. **BillsClient Component**: Added FAB and quick add modal for mobile users
 4. **Pay Bill Page**: Fixed Next.js 16 params handling by making params async (Promise-based)
 5. **Bills List Component**: Created client-side BillsList component to handle edit/delete callbacks and page refresh
+6. **Due Date Dropdown**: Fixed undefined value handling in Due Date selector to properly display dropdown options
 
 ### Next Immediate Tasks
 1. Create chart components using Recharts (CategoryPieChart, SpendingTrendChart, PaymentModeChart)

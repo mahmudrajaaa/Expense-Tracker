@@ -102,13 +102,13 @@ export function BillForm({
           Due Date (Day of Month) <span className="text-red-500">*</span>
         </Label>
         <Select
-          value={watch("due_date")?.toString()}
+          value={watch("due_date") ? watch("due_date").toString() : ""}
           onValueChange={(value) => setValue("due_date", parseInt(value))}
           disabled={isSubmitting}
         >
           <SelectTrigger id="due_date">
             <SelectValue placeholder="Select day (1-31)">
-              {watch("due_date") && `${watch("due_date")}${getDaySuffix(watch("due_date"))} of every month`}
+              {watch("due_date") ? `${watch("due_date")}${getDaySuffix(watch("due_date"))} of every month` : "Select day (1-31)"}
             </SelectValue>
           </SelectTrigger>
           <SelectContent className="max-h-[300px]">
